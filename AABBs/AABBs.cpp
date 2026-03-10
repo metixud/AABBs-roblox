@@ -129,17 +129,17 @@ int main() {
 
     std::string choice;
     while (true) {
-        std::cout << "do u wanna have esp: ";
+        std::cout << "do u wanna have AABBs: ";
         std::getline(std::cin, choice);
         std::transform(choice.begin(), choice.end(), choice.begin(), ::tolower);
 
         if (choice == "yes") {
             WriteMemory(address, true);
-            std::cout << "esp enabled\n";
+            std::cout << "AABBs enabled\n";
         }
         else if (choice == "no") {
             WriteMemory(address, false);
-            std::cout << "esp disabled\n";
+            std::cout << "AABBs disabled\n";
         }
         else if (choice == "exit") {
             break;
@@ -148,4 +148,5 @@ int main() {
 
     if (prochandle) CloseHandle(prochandle);
     return 0;
+
 }
