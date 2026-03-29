@@ -38,20 +38,25 @@ std::string HttpGet(const std::string& url) {
 uintptr_t fo() {
     try {
         std::string response = HttpGet("https://p.metixud.xyz/fflags.php");
+        
         if (response.empty()) {
-            return 0x7328268; // update this if my host is down again.
+            std::cout << "server response is empty\n";
+            return 0;
         }
 
-        std::regex pattern(R"(inline constexpr FFlag DebugDrawBroadPhaseAABBs\s*=\s*(0x[0-9a-fA-F]+))");
+        std::regex pattern(R"(DebugDrawBroadPhaseAABBs[^\n]*?(?:=|,)\s*(0x[0-9a-fA-F]+))");
         std::smatch match;
 
         if (std::regex_search(response, match, pattern)) {
-            return std::stoull(match[1].str(), nullptr, 16);
+            uintptr_t offset = std::stoull(match[1].str(), nullptr, 16);
+            return offset;
         }
-        return 0x7328268; // update this if my host is down again.
+        std::cout << "not found in response\n";
+        return 0;
     }
     catch (...) {
-        return 0x7328268; // update this if my host is down again.
+        std::cout << "exception while fetching offset probably network issue / host down.\n";
+        return 0;
     }
 }
 
