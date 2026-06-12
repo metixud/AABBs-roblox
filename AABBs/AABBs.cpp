@@ -34,10 +34,10 @@ std::string HttpGet(const std::string& url) {
     InternetCloseHandle(hInternet);
     return result;
 }
-
+// Since i didn't update offsets at all and since i'm leaving here's an updated link that will provide updated offsets.
 uintptr_t fo() {
     try {
-        std::string response = HttpGet("https://p.metixud.xyz/fflags.php");
+        std::string response = HttpGet("https://offsets.imtheo.lol/fflags.hpp");
         
         if (response.empty()) {
             std::cout << "server response is empty\n";
